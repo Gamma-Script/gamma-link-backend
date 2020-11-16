@@ -1,0 +1,29 @@
+php artisan make:migration create_proveedores_table --create=proveedores
+php artisan make:migration create_clientes_table --create=clientes
+php artisan make:migration create_categorias_table --create=categorias
+php artisan make:migration create_marcas_table --create=marcas
+php artisan make:migration create_departamentos_table --create=departamentos
+php artisan make:migration create_sucursales_table --create=sucursales
+php artisan make:migration create_productos_table --create=productos
+php artisan make:migration create_anuncios_table --create=anuncios
+php artisan make:migration create_puntuaciones_table --create=puntuaciones
+
+php artisan make:model Proveedor
+php artisan make:model Cliente
+php artisan make:model Categoria
+php artisan make:model Marca
+php artisan make:model Departamento
+php artisan make:model Sucursal
+php artisan make:model Producto
+php artisan make:model Anuncio
+php artisan make:model Puntuacion
+
+php artisan make:controller ProveedorController --resource --api
+php artisan make:controller ClienteController --resource --api
+php artisan make:controller CategoriaController --resource --api
+php artisan make:controller MarcaController --resource --api
+php artisan make:controller DepartamentoController --resource --api
+php artisan make:controller SucursalController --resource --api
+php artisan make:controller ProductoController --resource --api
+php artisan make:controller AnunciController --resource --api
+php artisan make:controller PuntuacionController --resource --api
