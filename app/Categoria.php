@@ -11,12 +11,8 @@ class Categoria extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nombre','descripcion','imagen','proveedor_id','categoria_padre_id'
+        'nombre','descripcion','imagen','categoria_padre_id','proveedor_id'
     ];
-
-    public function proveedor(){
-        return $this->belongsTo('App\Proveedor','proveedor_id','id');
-    }
 
     public function categoriaPadre(){
         return $this->belongsTo('App\Categoria','categoria_padre_id','id');
@@ -24,6 +20,10 @@ class Categoria extends Model
 
     public function categoriasHijas(){
     	return $this->hasMany('App\Categoria');
+    }
+
+    public function proveedor(){
+        return $this->belongsTo('App\Categoria','proveedor_id','id');
     }
 
     public function productos(){

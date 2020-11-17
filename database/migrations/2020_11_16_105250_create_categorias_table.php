@@ -21,7 +21,7 @@ class CreateCategoriasTable extends Migration
             $table->string('descripcion',512);
             $table->string('imagen',512);
 
-            $table->unsignedBigInteger('proveedor_id');
+            $table->unsignedBigInteger('proveedor_id')->nullable();
             $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('CASCADE');
 
             $table->unsignedBigInteger('categoria_padre_id')->nullable();

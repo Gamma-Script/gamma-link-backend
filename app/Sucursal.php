@@ -21,8 +21,4 @@ class Sucursal extends Model
     public function departamento(){
         return $this->belongsTo('App\departamento','departamento_id','id');
     }
-
-    public function productos(){
-    	return $this->hasMany('App\Producto');
-    }
 }

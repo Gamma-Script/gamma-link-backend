@@ -18,18 +18,13 @@ class Proveedor extends Model
         return $this->belongsTo('App\User','user_id','id');
     }
 
-    public function productos(){
-    	return $this->hasMany('App\Producto');
-    }
-
-    public function categorias(){
-    	return $this->hasMany('App\Categoria');
-    }
-
     public function anuncios(){
     	return $this->hasMany('App\Anuncio');
     }
 
+    public function categorias(){
+        return $this->hasMany('App\Categoria');
+    }
 
     public function sucursales(){
     	return $this->hasMany('App\Sucursal');
