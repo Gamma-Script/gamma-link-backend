@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('puntuaciones','PuntuacionController@index');
 Route::post('puntuaciones','PuntuacionController@store');
+Route::get('proveedores','ProveedorController@index');
+Route::get('proveedores/{id}','ProveedorController@show');
