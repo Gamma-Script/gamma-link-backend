@@ -28,3 +28,5 @@ Route::get('productos','ProductoController@productosFiltrados');
 
 
 
+Route::get('puntuaciones','PuntuacionController@index');
+Route::post('puntuaciones','PuntuacionController@store');
