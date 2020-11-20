@@ -25,3 +25,18 @@ Route::get('categorias','CategoriaController@index');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('productos','ProductoController@index');
+Route::post('productos','ProductoController@store');
+Route::put('productos/{id}','ProductoController@update');
+Route::delete('productos/{id}','ProductoController@destroy');
+Route::get('productos','ProductoController@productosFiltrados');
+
+
+
+
+Route::get('puntuaciones','PuntuacionController@index');
+Route::post('puntuaciones','PuntuacionController@store');
+Route::get('proveedores','ProveedorController@index');
+Route::get('proveedores/{id}','ProveedorController@show');
