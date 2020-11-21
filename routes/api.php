@@ -40,3 +40,11 @@ Route::get('puntuaciones','PuntuacionController@index');
 Route::post('puntuaciones','PuntuacionController@store');
 Route::get('proveedores','ProveedorController@index');
 Route::get('proveedores/{id}','ProveedorController@show');
+
+
+
+Route::get('anuncios', 'AnuncioController@index')->name("anuncios_index");
+Route::post('anuncios', 'AnuncioController@store')->name("anuncios_store");
+Route::get('anuncios/{id}','AnuncioController@show')->name("anuncios_show");
+Route::put('anuncios/{id}','AnuncioController@update')->name("anuncios_update");
+Route::delete('anuncios/{id}','AnuncioController@destroy')->name("anuncios_destroy");
