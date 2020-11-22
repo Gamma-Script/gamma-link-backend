@@ -38,6 +38,8 @@ class ProveedorController extends Controller
      */
     public function show($id)
     {
+        $proveedor =Proveedor::find($id);
+       return $proveedor;
     }
 
     /**
@@ -62,4 +64,18 @@ class ProveedorController extends Controller
     {
         //
     }
+
+    public function filtradoProveedor(Request $request){
+        $filtroUbicacion ="";
+        $filtroPuntuacion ="";
+        
+        if(!is_null($request->filtroUbicacion)){
+            $filtradoProveedor =Sucursal::where('proveedor_id',$request->filtroUbicacion)->get();
+        }
+        if(!is_null($request->filtroPuntuacion)){
+            $filtradoProveedor =Puntuacion::where('proveedor_id',$request->filtroPuntuacion)->get();
+        }
+
+    }
+
 }
