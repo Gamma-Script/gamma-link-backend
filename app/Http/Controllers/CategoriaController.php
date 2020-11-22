@@ -28,15 +28,18 @@ class CategoriaController extends Controller
             'nombre'=>'required',
             'descripcion'=>'required',
             'imagen'=>'required',
-            'categoria_padre_id'=>'numeric',
-            'proveedor_id'=>'numeric'
+            'categoria_padre_id'=>'numeric|exists:categorias,id',
+            'proveedor_id'=>'numeric|exists:proveedores,id',
         ];
         $mensajes= [
             'nombre.required'=>'Debe ingresar un nombre a la categoria',
             'descripcion.required'=> 'Debe ingresar una descripcion a la categoria',
             'imagen.required'=>'Debe ingresar una imagen',
             'categoria_padre_id.numeric'=>'Debe ingresar un id valido en la categoria',
-            'categoria_id.numeric'=>'Debe ingresar un id valido de proveedor',
+            'categoria_padre_id.exists'=>'El id de la categoria padre no esta registrado',
+            'proveedor_id.numeric'=>'Debe ingresar un id valido de proveedor',
+            'proveedor_id.exists'=>'El id del proveedor no esta registrado',
+
         ];
 
         $validator = Validator::make($request->all(), $reglas, $mensajes);
@@ -97,15 +100,19 @@ class CategoriaController extends Controller
             'nombre'=>'required',
             'descripcion'=>'required',
             'imagen'=>'required',
-            'categoria_padre_id'=>'numeric',
-            'proveedor_id'=>'numeric'
+            'categoria_padre_id'=>'numeric|exists:categorias,id',
+            'proveedor_id'=>'numeric|exists:proveedores,id',
+
         ];
         $mensajes= [
             'nombre.required'=>'Debe ingresar un nombre a la categoria',
             'descripcion.required'=> 'Debe ingresar una descripcion a la categoria',
             'imagen.required'=>'Debe ingresar una imagen',
             'categoria_padre_id.numeric'=>'Debe ingresar un id valido en la categoria',
-            'categoria_id.numeric'=>'Debe ingresar un id valido de proveedor',
+            'categoria_padre_id.exists'=>'Debe ingresar un id valido en la categoria',
+            'proveedor_id.numeric'=>'Debe ingresar un id valido de proveedor',
+            'proveedor_id.exists'=>'El id del proveedor no esta registrado',
+
         ];
         $validator = Validator::make($request->all(), $reglas, $mensajes);
 
