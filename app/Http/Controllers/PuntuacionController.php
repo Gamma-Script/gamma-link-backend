@@ -86,7 +86,7 @@ class PuntuacionController extends Controller
     public function show($id)
     {
         $puntuacion =Puntuacion::find($id);
-       return $puntuacion;
+        return $puntuacion;
     }
 
     /**

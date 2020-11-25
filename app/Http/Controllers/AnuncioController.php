@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anuncio;
+use Validator;
 
 class AnuncioController extends Controller
 {
@@ -32,7 +33,7 @@ class AnuncioController extends Controller
             'imagen'=>'required',
             'fecha_publicacion'=>'required',
             'fecha_baja'=>'required',
-            'estado'=>'require',
+            'estado'=>'required', //require
             'proveedor_id'=>'required'
         ];
 
@@ -102,7 +103,7 @@ class AnuncioController extends Controller
             'imagen'=>'required',
             'fecha_publicacion'=>'required',
             'fecha_baja'=>'required',
-            'estado'=>'require',
+            'estado'=>'required', //require
             'proveedor_id'=>'required'
         ];
 
@@ -141,7 +142,7 @@ class AnuncioController extends Controller
         return $anuncio;
 
         return response()->json([
-            'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha actualizado con exito'],201);
+            'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha actualizado con exito'],200); //201
 
 
         }
@@ -157,7 +158,7 @@ class AnuncioController extends Controller
      */
     public function destroy($id)
     {
-         $requerimientos=[
+         /*$requerimientos=[
             'nombre'=>'required',
             'descripcion'=>'required',
             'imagen'=>'required',
@@ -178,17 +179,16 @@ class AnuncioController extends Controller
             'proveedor_id.required'=>'Debe ingresar el id de proveedor'
 
         ];
-        $validator= Validator::make($request->all(),$requerimientos,$mensajes);
+        $validator= Validator::make($request->all(),$requerimientos,$mensajes);*/
 
-        if($validator->fails()){
+       /* if($validator->fails()){
             return response()->json([
                 'errores'=>$validator->errors(),
                 'mensaje'=>'Error en la peticion'],400);
-        }else{
-            return Anuncio::find($id)->delete();
-            return response()->json([
-            'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha eliminado con exito'],201);
-        }
+        }else{*/
+            Anuncio::find($id)->delete();
+            return response()->json(['mensaje'=>'El anuncio se ha eliminado con exito'],200);//201
+        
         
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Producto;
 
 
-use validator;
+use Validator; //validator
 
 class ProductoController extends Controller
 {
@@ -47,7 +47,7 @@ class ProductoController extends Controller
             'precio.numeric'=> 'El precio debe ser un numero',
             'precio.min'=> 'El precio debe ser un numero positivo',
             'marca_id.required'=>'La marca debe ser ingresada',
-            'categoria_id.required'=>'La descripcion debe ser ingresada'
+            'categoria_id.required'=>'La categoria debe ser ingresada' //
         ];
 
         $validator= Validator::make($request->all(),$reglas,$mensajes);
@@ -69,7 +69,7 @@ class ProductoController extends Controller
             $producto->categoria_id= $request->categoria_id;
             $producto->save();
     
-            return $producto;
+            // return $producto;
             return response()->json([
                 'producto'=>$producto,
                 'mensaje'=>'El producto se ha creado con exito'
@@ -143,7 +143,7 @@ class ProductoController extends Controller
 
         $producto->save();
 
-        return $producto;
+        // return $producto;
         return response()->json([
             'producto'=>$producto,
             'mensaje'=>'El producto se ha actualizado con exito'
