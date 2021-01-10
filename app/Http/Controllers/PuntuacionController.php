@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Puntuacion;
 use Illuminate\Http\Request;
-use validator;
+use Validator;
 
 class PuntuacionController extends Controller
 {
@@ -25,56 +25,40 @@ class PuntuacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {/*
-        $reglas = [
-            'puntuacion'=>'required',
-            'comentario'=>'required',
-            'proveedor_id'=>'required',
-            'cliente_id'=>'required'
+    {
+        $reglas =[
+            'puntuacion'=>'required|integer|min:1|max:5',
+            'proveedorId'=>'required',
+            'clienteId'=>'required'
         ];
 
-        $mensajes=[
-            'puntuacion.required'=>'La puntuacion debe ser ingresada',
-            'comentario.required'=>'Comentario debe ser ingresado',
-            'proveedor_id.required'=>'El proveedor debe ser seleccionado',
-            'cliente_id.required'=>'El cliente tiene que identificarse'
+        $mensajes= [
+            'puntuacion.required'=>'Debe ingresar una puntuación',
+            'puntuacion.integer'=> 'Puntuación debe ser un valor entero',
+            'puntuacion.min'=>'Puntuación debe ser un valor entre 1 y 5',
+            'puntuacion.max'=>'Puntuación debe ser un valor entre 1 y 5',
+            'proveedorId.required'=>'Debe ingresar un proveedor',
+            'clienteId.required'=>'Debe ingresar un cliente'
         ];
 
-        $validator= Validator::make($request->all(),$reglas,$mensajes);
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if($validator->fails()){
+            return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+        }
+        else{
 
-            return response()->json([
-                'errores' =>$validator->errors(),
-                'mensaje'=>'Error al procesar '
-            ],400);
-        }else{
             $puntuacion = new Puntuacion;
 
             $puntuacion->puntuacion = $request->puntuacion;
             $puntuacion->comentario = $request->comentario;
-            $puntuacion->proveedor_id = $request->proveedor_id;
-            $puntuacion->cliente_id = $request->cliente_id;
-
+            $puntuacion->proveedor_id=$request->proveedorId;
+            $puntuacion->cliente_id=$request->clienteId;
             $puntuacion->save();
+            
+            return response()->json(['puntuacion'=>$puntuacion, 'mensaje'=>'La puntuación se ha agregado con éxito'],201);
 
-            return $puntuacion;
-            return response()->json([
-                'puntuacion'=>$puntuacion,
-                'mensaje'=>'La puntuacion ha sido procesada con exito'
-            ],201);
         }
-        */
-        $puntuacion = new Puntuacion;
-
-        $puntuacion->puntuacion = $request->puntuacion;
-        $puntuacion->comentario = $request->comentario;
-        $puntuacion->proveedor_id = $request->proveedor_id;
-        $puntuacion->cliente_id = $request->cliente_id;
-
-        $puntuacion->save();
-
-        return $puntuacion;
     }
 
     /**
@@ -98,7 +82,45 @@ class PuntuacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $puntuacion = Puntuacion::find($id);
+
+        if(is_null($puntuacion)){
+            return response()->json(['puntuacion'=>null,'mensaje'=>'La puntuación no está registrada en la base de datos'],404);
+        }else{
+
+            $reglas =[
+                'puntuacion'=>'required|integer|min:1|max:5',
+                'proveedorId'=>'required',
+                'clienteId'=>'required',
+            ];
+            $mensajes= [
+                'puntuacion.required'=>'Debe ingresar una puntuación',
+                'puntuacion.integer'=> 'Puntuación debe ser un valor entero',
+                'puntuacion.min'=>'Puntuación debe ser un valor entre 1 y 5',
+                'puntuacion.max'=>'Puntuación debe ser un valor entre 1 y 5',
+                'proveedorId.required'=>'Debe ingresar un proveedor',
+                'clienteId.required'=>'Debe ingresar un cliente'
+            ];
+
+            $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+            if($validator->fails()){
+                return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+            }
+            else{
+
+                $puntuacion->puntuacion = $request->puntuacion;
+                $puntuacion->comentario = $request->comentario;
+                $puntuacion->proveedor_id=$request->proveedorId;
+                $puntuacion->cliente_id=$request->clienteId;
+                $puntuacion->save();
+                
+                return response()->json(['puntuacion'=>$puntuacion, 'mensaje'=>'La puntuación se ha modificado con éxito'],200);
+
+            }
+
+        }
     }
 
     /**
@@ -109,6 +131,15 @@ class PuntuacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $puntuacion = Puntuacion::find($id);
+
+        if(is_null($puntuacion)){
+            return response()->json(['puntuacion'=>null,'mensaje'=>'La puntuación no esta registrada en la base de datos'],404);
+            
+        }
+        else{
+            $puntuacion->delete();
+            return response()->json(['mensaje'=> 'La puntuación se ha eliminado con exito'],200);
+        }
     }
 }

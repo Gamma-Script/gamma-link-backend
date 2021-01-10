@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Categoria;
+use App\Proveedor;
 use Illuminate\Http\Request;
 use Validator;
 class CategoriaController extends Controller
@@ -14,6 +15,28 @@ class CategoriaController extends Controller
     public function index()
     {
         return Categoria::all();
+    }
+
+    public function indexUsuario(Request $request)
+    {
+        $tipo=$request->usuarioTipo;
+        $idUsuario=$request->usuarioId;
+        switch ($tipo) {
+            case "0":
+                $proveedor = Proveedor::find($idUsuario);
+                if(is_null($proveedor)){
+                    return response()->json(['proveedor'=>null,'mensaje'=>'El proveedor no está registrado en la base de datos'],200);
+                }else{
+                    $categorias = Categoria::where('proveedor_id',$idUsuario);
+                    return response()->json(['categorias'=>$categorias,'mensaje'=>'Categorias del proveedor obtenidas con éxito'],200);
+                }
+            break;
+            case "1":
+                $categorias = Categoria::all();
+            break;
+        }
+
+        return response()->json(['categorias'=>$categorias, 'mensaje'=>'Categorias obtenidas con exito'],200);
     }
 
     /**

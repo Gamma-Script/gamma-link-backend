@@ -18,6 +18,16 @@ class AnuncioController extends Controller
         return Anuncio::all();
     }
 
+    public function indexProveedor($proveedorId)
+    {
+        $anuncios = Anuncio::where("proveedor_id",$proveedorId);
+        if(is_null($anuncio)){
+            return response()->json(['anuncios'=>null,'mensaje'=>'El proveedor no cuenta con anuncios'],200);
+        }else{
+            return Anuncio::all();
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -33,10 +43,9 @@ class AnuncioController extends Controller
             'imagen'=>'required',
             'fecha_publicacion'=>'required',
             'fecha_baja'=>'required',
-            'estado'=>'required', //require
+            'estado'=>'required',
             'proveedor_id'=>'required'
         ];
-
 
         $mensajes=[
             'nombre.required'=>'Ingrese un nombre',
@@ -56,19 +65,18 @@ class AnuncioController extends Controller
                 'errores'=>$validator->errors(),
                 'mensaje'=>'Error en la peticion'],400);
         }else{
+            
             $anuncio = new Anuncio;
-        $anuncio->id = $request->id;
-        $anuncio->nombre = $request ->nombre;
-        $anuncio->descripcion = $request->descripcion;
-        $anuncio->imagen = $request->imagen;
-        $anuncio->fecha_publicacion = $request->fecha_publicacion;
-        $anuncio->fecha_baja = $request->fecha_baja;
-        $anuncio->estado = $request->estado;
-        $anuncio->proveedor_id = $request ->proveedor_id;
 
-        $anuncio->save();
+            $anuncio->nombre = $request ->nombre;
+            $anuncio->descripcion = $request->descripcion;
+            $anuncio->imagen = $request->imagen;
+            $anuncio->fecha_publicacion = $request->fecha_publicacion;
+            $anuncio->fecha_baja = $request->fecha_baja;
+            $anuncio->estado = $request->estado;
+            $anuncio->proveedor_id = $request ->proveedor_id;
 
-        return $anuncio;
+            $anuncio->save();
 
         return response()->json([
             'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha creado con exito'],201);
@@ -85,7 +93,12 @@ class AnuncioController extends Controller
      */
     public function show($id)
     {
-        return Anuncio::find($id);
+        $anuncio = Anuncio::find($id);
+        if(is_null($anuncio)){
+            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+        }else{
+            return response()->json(['anuncio'=>$anuncio,'mensaje'=>'Anuncio obtenido con éxito'],200);
+        }
     }
 
     /**
@@ -97,57 +110,56 @@ class AnuncioController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $requerimientos=[
-            'nombre'=>'required',
-            'descripcion'=>'required',
-            'imagen'=>'required',
-            'fecha_publicacion'=>'required',
-            'fecha_baja'=>'required',
-            'estado'=>'required', //require
-            'proveedor_id'=>'required'
-        ];
 
+         $anuncio = Anuncio::find($id);
 
-        $mensajes=[
-            'nombre.required'=>'Ingrese un nombre',
-            'descripcion.required'=>'Debe ingresar una descripcion',
-            'imagen.required'=>'Debe ingresar una imagen',
-            'fecha_publicacion.required'=>'Debe ingresar la fecha de publicacion',
-            'fecha_baja.required'=>'Debe ingresar la fecha de baja',
-            'estado.required'=>'Ingrese un estado',
-            'proveedor_id.required'=>'Debe ingresar el id de proveedor'
+         if(is_null($anuncio)){
+            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+         }else{
 
-        ];
-        $validator= Validator::make($request->all(),$requerimientos,$mensajes);
+            $requerimientos=[
+                'nombre'=>'required',
+                'descripcion'=>'required',
+                'imagen'=>'required',
+                'fecha_publicacion'=>'required',
+                'fecha_baja'=>'required',
+                'estado'=>'required',
+                'proveedor_id'=>'required'
+            ];
 
-        if($validator->fails()){
-            return response()->json([
-                'errores'=>$validator->errors(),
-                'mensaje'=>'Error en la peticion'],400);
-        }else{
+            $mensajes=[
+                'nombre.required'=>'Ingrese un nombre',
+                'descripcion.required'=>'Debe ingresar una descripcion',
+                'imagen.required'=>'Debe ingresar una imagen',
+                'fecha_publicacion.required'=>'Debe ingresar la fecha de publicacion',
+                'fecha_baja.required'=>'Debe ingresar la fecha de baja',
+                'estado.required'=>'Ingrese un estado',
+                'proveedor_id.required'=>'Debe ingresar el id de proveedor'
 
-        $anuncio = Anuncio::find($id);
+            ];
 
-        $anuncio->id = $request->id;
-        $anuncio->nombre = $request ->nombre;
-        $anuncio->descripcion = $request->descripcion;
-        $anuncio->imagen = $request->imagen;
-        $anuncio->fecha_publicacion = $request->fecha_publicacion;
-        $anuncio->fecha_baja = $request->fecha_baja;
-        $anuncio->estado = $request->estado;
-        $anuncio->proveedor_id = $request ->proveedor_id;
+            $validator= Validator::make($request->all(),$requerimientos,$mensajes);
 
-        $anuncio->save();
+            if($validator->fails()){
+                return response()->json([
+                    'errores'=>$validator->errors(),
+                    'mensaje'=>'Error en la peticion'],400);
+            }else{
 
-        return $anuncio;
+                $anuncio->nombre = $request ->nombre;
+                $anuncio->descripcion = $request->descripcion;
+                $anuncio->imagen = $request->imagen;
+                $anuncio->fecha_publicacion = $request->fecha_publicacion;
+                $anuncio->fecha_baja = $request->fecha_baja;
+                $anuncio->estado = $request->estado;
+                $anuncio->proveedor_id = $request ->proveedor_id;
 
-        return response()->json([
-            'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha actualizado con exito'],200); //201
+                $anuncio->save();
 
-
+                return response()->json([
+                    'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha actualizado con éxito'],200); //201
+            }
         }
-        
-        
     }
 
     /**
@@ -158,37 +170,36 @@ class AnuncioController extends Controller
      */
     public function destroy($id)
     {
-         /*$requerimientos=[
-            'nombre'=>'required',
-            'descripcion'=>'required',
-            'imagen'=>'required',
-            'fecha_publicacion'=>'required',
-            'fecha_baja'=>'required',
-            'estado'=>'require',
-            'proveedor_id'=>'required'
-        ];
+        $anuncio = Anuncio::find($id);
+        if(is_null($anuncio)){
+            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+        }else{
+            $anuncio->delete();
+            return response()->json(['mensaje'=>'El anuncio se ha eliminado con éxito'],200);
+        }
+    }
 
+    public function baja($id)
+    {
+        $anuncio = Anuncio::find($id);
+        if(is_null($anuncio)){
+            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+        }else{
+            $anuncio->estado=0;
+            $anuncio->save();
+            return response()->json(['mensaje'=>'El anuncio se ha dado de baja con éxito'],200);
+        }
+    }
 
-        $mensajes=[
-            'nombre.required'=>'Ingrese un nombre',
-            'descripcion.required'=>'Debe ingresar una descripcion',
-            'imagen.required'=>'Debe ingresar una imagen',
-            'fecha_publicacion.required'=>'Debe ingresar la fecha de publicacion',
-            'fecha_baja.required'=>'Debe ingresar la fecha de baja',
-            'estado.required'=>'Ingrese un estado',
-            'proveedor_id.required'=>'Debe ingresar el id de proveedor'
-
-        ];
-        $validator= Validator::make($request->all(),$requerimientos,$mensajes);*/
-
-       /* if($validator->fails()){
-            return response()->json([
-                'errores'=>$validator->errors(),
-                'mensaje'=>'Error en la peticion'],400);
-        }else{*/
-            Anuncio::find($id)->delete();
-            return response()->json(['mensaje'=>'El anuncio se ha eliminado con exito'],200);//201
-        
-        
+    public function subida($id)
+    {
+        $anuncio = Anuncio::find($id);
+        if(is_null($anuncio)){
+            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+        }else{
+            $anuncio->estado=1;
+            $anuncio->save();
+            return response()->json(['mensaje'=>'El anuncio se ha subido con éxito'],200);
+        }
     }
 }

@@ -19,6 +19,48 @@ class ProveedorController extends Controller
         return Proveedor::all();
     }
 
+    public function anuncios($id){
+        $proveedor = Proveedor::find($id);
+        if(is_null($proveedor)){
+            return response()->json(['anuncios'=>null,'mensaje'=>'El proveedor no está registrado en la base de datos'],404);
+        }else{
+            $anuncios = $proveedor->anuncios;
+            if(is_null($anuncios) || count($anuncios)==0){
+                return response()->json(['anuncios'=>$anuncios,'mensaje'=>'El proveedor no posee anuncios'],200);
+            }else{
+                return response()->json(['anuncios'=>$anuncios,'mensaje'=>'Anuncios obtenidos con éxito'],200);
+            }
+        }
+    }
+
+    public function puntuaciones($id){
+        $proveedor = Proveedor::find($id);
+        if(is_null($proveedor)){
+            return response()->json(['puntuaciones'=>null,'mensaje'=>'El proveedor no está registrado en la base de datos'],404);
+        }else{
+            $puntuaciones = $proveedor->puntuaciones;
+            if(is_null($puntuaciones) || count($puntuaciones)==0){
+                return response()->json(['puntuaciones'=>$puntuaciones,'mensaje'=>'El proveedor no posee puntuaciones'],200);
+            }else{
+                return response()->json(['puntuaciones'=>$puntuaciones,'mensaje'=>'Puntuaciones obtenidos con éxito'],200);
+            }
+        }
+    }
+
+    public function categorias($id){
+        $proveedor = Proveedor::find($id);
+        if(is_null($proveedor)){
+            return response()->json(['anuncios'=>null,'mensaje'=>'El proveedor no está registrado en la base de datos'],404);
+        }else{
+            $categorias = $proveedor->categorias;
+            if(is_null($categorias) || count($categorias)==0){
+                return response()->json(['categorias'=>$categorias,'mensaje'=>'El proveedor no posee categorias'],200);
+            }else{
+                return response()->json(['categorias'=>$categorias,'mensaje'=>'Categorias obtenidos con éxito'],200);
+            }
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,8 +80,8 @@ class ProveedorController extends Controller
      */
     public function show($id)
     {
-        $proveedor =Proveedor::find($id);
-       return $proveedor;
+        $proveedor = Proveedor::find($id);
+        return $proveedor;
     }
 
     /**

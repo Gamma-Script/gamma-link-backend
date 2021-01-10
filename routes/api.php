@@ -13,38 +13,53 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('categorias','CategoriaController@index');
-    Route::post('categorias','CategoriaController@store');
-    Route::get('categorias/{id}','CategoriaController@show');
-    Route::put('categorias/{id}','CategoriaController@update');
-    Route::delete('categoria/{id}','CategoriaController@destroy');
 
-    Route::post('clientes','ClienteController@store');
-    
+
+
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 });
 
+Route::get('anuncios', 'AnuncioController@index');
+Route::get('anuncios/{id}','AnuncioController@show');
+Route::post('anuncios', 'AnuncioController@store');
+Route::put('anuncios/{id}','AnuncioController@update');
+Route::delete('anuncios/{id}','AnuncioController@destroy');
+Route::put('anuncios/{id}/baja','AnuncioController@baja');
+Route::put('anuncios/{id}/subida','AnuncioController@subida');
+Route::put('anuncios-proveedor/{id}/subida','AnuncioController@subida');
+
+Route::get('categorias','CategoriaController@index');
+Route::get('categorias/{id}','CategoriaController@show');
+Route::post('categorias','CategoriaController@store');
+Route::put('categorias/{id}','CategoriaController@update');
+Route::delete('categorias/{id}','CategoriaController@destroy');
+Route::get('categorias-usuario','CategoriaController@indexUsuario');
+
+Route::post('clientes','ClienteController@store');
 
 Route::get('productos','ProductoController@index');
+Route::get('productos/{id}','ProductoController@show');
 Route::post('productos','ProductoController@store');
 Route::put('productos/{id}','ProductoController@update');
 Route::delete('productos/{id}','ProductoController@destroy');
-Route::get('productos','ProductoController@productosFiltrados');
+
+Route::get('productos-filtrados','ProductoController@productosFiltrados');
+Route::get('productos-usuario','ProductoController@indexUsuario');
+
+Route::get('proveedores','ProveedorController@index');
+Route::get('proveedores/{id}/anuncios','ProveedorController@anuncios');
+Route::get('proveedores/{id}/puntuaciones','ProveedorController@puntuaciones');
+Route::get('proveedores/{id}/categorias','ProveedorController@categorias');
 
 
 
 
 Route::get('puntuaciones','PuntuacionController@index');
 Route::post('puntuaciones','PuntuacionController@store');
-Route::get('proveedores','ProveedorController@index');
+Route::put('puntuaciones/{id}','PuntuacionController@update');
+Route::delete('puntuaciones/{id}','PuntuacionController@destroy');
+
 Route::get('proveedores/{id}','ProveedorController@show');
-
-
-
-Route::get('anuncios', 'AnuncioController@index')->name("anuncios_index");
-Route::post('anuncios', 'AnuncioController@store')->name("anuncios_store");
-Route::get('anuncios/{id}','AnuncioController@show')->name("anuncios_show");
-Route::put('anuncios/{id}','AnuncioController@update')->name("anuncios_update");
-Route::delete('anuncios/{id}','AnuncioController@destroy')->name("anuncios_destroy");
