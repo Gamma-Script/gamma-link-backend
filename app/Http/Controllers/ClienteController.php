@@ -43,7 +43,7 @@ class ClienteController extends Controller
         $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if($validator->fails()){
-            return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+            return response()->json($validator->errors(),400);
         }
         else{
 
@@ -60,7 +60,7 @@ class ClienteController extends Controller
             $cliente->user_id = $usuario->id;
             $cliente->save();
             
-            return response()->json(['mensaje'=>'La cuenta se ha creado con exito'],201);
+            return response()->json('La cuenta se ha creado con exito',201);
 
         }
 

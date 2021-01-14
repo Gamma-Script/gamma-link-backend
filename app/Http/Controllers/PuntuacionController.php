@@ -44,7 +44,7 @@ class PuntuacionController extends Controller
         $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if($validator->fails()){
-            return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+            return response()->json($validator->errors(),400);
         }
         else{
 
@@ -56,7 +56,7 @@ class PuntuacionController extends Controller
             $puntuacion->cliente_id=$request->clienteId;
             $puntuacion->save();
             
-            return response()->json(['puntuacion'=>$puntuacion, 'mensaje'=>'La puntuación se ha agregado con éxito'],201);
+            return response()->json($puntuacion,201);
 
         }
     }
@@ -86,7 +86,7 @@ class PuntuacionController extends Controller
         $puntuacion = Puntuacion::find($id);
 
         if(is_null($puntuacion)){
-            return response()->json(['puntuacion'=>null,'mensaje'=>'La puntuación no está registrada en la base de datos'],404);
+            return response()->json(null,404);
         }else{
 
             $reglas =[
@@ -106,7 +106,7 @@ class PuntuacionController extends Controller
             $validator = Validator::make($request->all(), $reglas, $mensajes);
 
             if($validator->fails()){
-                return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+                return response()->json($validator->errors(),400);
             }
             else{
 
@@ -116,7 +116,7 @@ class PuntuacionController extends Controller
                 $puntuacion->cliente_id=$request->clienteId;
                 $puntuacion->save();
                 
-                return response()->json(['puntuacion'=>$puntuacion, 'mensaje'=>'La puntuación se ha modificado con éxito'],200);
+                return response()->json($puntuacion,200);
 
             }
 
@@ -134,12 +134,12 @@ class PuntuacionController extends Controller
         $puntuacion = Puntuacion::find($id);
 
         if(is_null($puntuacion)){
-            return response()->json(['puntuacion'=>null,'mensaje'=>'La puntuación no esta registrada en la base de datos'],404);
+            return response()->json(null,404);
             
         }
         else{
             $puntuacion->delete();
-            return response()->json(['mensaje'=> 'La puntuación se ha eliminado con exito'],200);
+            return response()->json('La puntuación se ha eliminado con exito',200);
         }
     }
 }

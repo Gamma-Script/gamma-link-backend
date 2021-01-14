@@ -22,7 +22,7 @@ class AnuncioController extends Controller
     {
         $anuncios = Anuncio::where("proveedor_id",$proveedorId);
         if(is_null($anuncio)){
-            return response()->json(['anuncios'=>null,'mensaje'=>'El proveedor no cuenta con anuncios'],200);
+            return response()->json(null,200);
         }else{
             return Anuncio::all();
         }
@@ -61,9 +61,7 @@ class AnuncioController extends Controller
         $validator= Validator::make($request->all(),$requerimientos,$mensajes);
 
         if($validator->fails()){
-            return response()->json([
-                'errores'=>$validator->errors(),
-                'mensaje'=>'Error en la peticion'],400);
+            return response()->json($validator->errors(),400);
         }else{
             
             $anuncio = new Anuncio;
@@ -78,8 +76,7 @@ class AnuncioController extends Controller
 
             $anuncio->save();
 
-        return response()->json([
-            'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha creado con exito'],201);
+        return response()->json($anuncio,201);
         }
 
        }
@@ -95,9 +92,9 @@ class AnuncioController extends Controller
     {
         $anuncio = Anuncio::find($id);
         if(is_null($anuncio)){
-            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+            return response()->json(null,404);
         }else{
-            return response()->json(['anuncio'=>$anuncio,'mensaje'=>'Anuncio obtenido con éxito'],200);
+            return response()->json($anuncio,200);
         }
     }
 
@@ -114,7 +111,7 @@ class AnuncioController extends Controller
          $anuncio = Anuncio::find($id);
 
          if(is_null($anuncio)){
-            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+            return response()->json(null,404);
          }else{
 
             $requerimientos=[
@@ -141,9 +138,7 @@ class AnuncioController extends Controller
             $validator= Validator::make($request->all(),$requerimientos,$mensajes);
 
             if($validator->fails()){
-                return response()->json([
-                    'errores'=>$validator->errors(),
-                    'mensaje'=>'Error en la peticion'],400);
+                return response()->json($validator->errors(),400);
             }else{
 
                 $anuncio->nombre = $request ->nombre;
@@ -156,8 +151,7 @@ class AnuncioController extends Controller
 
                 $anuncio->save();
 
-                return response()->json([
-                    'anuncio'=>$anuncio,'mensaje'=>'El anuncio se ha actualizado con éxito'],200); //201
+                return response()->json($anuncio,200); //201
             }
         }
     }
@@ -172,10 +166,10 @@ class AnuncioController extends Controller
     {
         $anuncio = Anuncio::find($id);
         if(is_null($anuncio)){
-            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+            return response()->json(null,404);
         }else{
             $anuncio->delete();
-            return response()->json(['mensaje'=>'El anuncio se ha eliminado con éxito'],200);
+            return response()->json('El anuncio se ha eliminado con éxito',200);
         }
     }
 
@@ -183,11 +177,11 @@ class AnuncioController extends Controller
     {
         $anuncio = Anuncio::find($id);
         if(is_null($anuncio)){
-            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+            return response()->json(null,404);
         }else{
             $anuncio->estado=0;
             $anuncio->save();
-            return response()->json(['mensaje'=>'El anuncio se ha dado de baja con éxito'],200);
+            return response()->json('El anuncio se ha dado de baja con éxito',200);
         }
     }
 
@@ -195,11 +189,11 @@ class AnuncioController extends Controller
     {
         $anuncio = Anuncio::find($id);
         if(is_null($anuncio)){
-            return response()->json(['anuncio'=>null,'mensaje'=>'El anuncio no está registrado en la base de datos'],404);
+            return response()->json(null,404);
         }else{
             $anuncio->estado=1;
             $anuncio->save();
-            return response()->json(['mensaje'=>'El anuncio se ha subido con éxito'],200);
+            return response()->json('El anuncio se ha subido con éxito',200);
         }
     }
 }

@@ -25,10 +25,10 @@ class CategoriaController extends Controller
             case "0":
                 $proveedor = Proveedor::find($idUsuario);
                 if(is_null($proveedor)){
-                    return response()->json(['proveedor'=>null,'mensaje'=>'El proveedor no está registrado en la base de datos'],200);
+                    return response()->json(null,200);
                 }else{
                     $categorias = Categoria::where('proveedor_id',$idUsuario);
-                    return response()->json(['categorias'=>$categorias,'mensaje'=>'Categorias del proveedor obtenidas con éxito'],200);
+                    return response()->json($categorias,200);
                 }
             break;
             case "1":
@@ -36,7 +36,7 @@ class CategoriaController extends Controller
             break;
         }
 
-        return response()->json(['categorias'=>$categorias, 'mensaje'=>'Categorias obtenidas con exito'],200);
+        return response()->json($categorias,200);
     }
 
     /**
@@ -68,7 +68,7 @@ class CategoriaController extends Controller
         $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if($validator->fails()){
-            return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+            return response()->json($validator->errors(),400);
         }
         else{
             $categoria = new Categoria;
@@ -79,8 +79,7 @@ class CategoriaController extends Controller
             $categoria->proveedor_id=$request->proveedor_id;
             $categoria->save();
             
-            return response()->json([
-            'categoria'=>$categoria, 'mensaje'=>'La categoria ha sido creada con exito'],201);
+            return response()->json($categoria,201);
 
         }
 
@@ -97,15 +96,12 @@ class CategoriaController extends Controller
         $categoria = Categoria::find($id);
 
         if(is_null($categoria)){
-            return response()->json(['categoria'=>null,'mensaje'=>'La categoria no esta registrada en la base de datos'],404);
+            return response()->json(null,404);
             
         }
         else{
-            return response()->json([
-            'categoria'=>$categoria, 
-            'mensaje'=> 'El categoria se ha econtrado con exito'
-        ],200);
-    }
+            return response()->json($categoria,200);
+        }
     }
 
     /**
@@ -140,12 +136,12 @@ class CategoriaController extends Controller
         $validator = Validator::make($request->all(), $reglas, $mensajes);
 
         if(is_null($categoria)){
-            return response()->json(['categoria'=>null,'mensaje'=>'La categoria no esta registrada en la base de datos'],404);
+            return response()->json(null,404);
             
         }
         else{
             if($validator->fails()){
-                return response()->json(['errores'=>$validator->errors(), 'mensaje'=>'Se han encontrado errores en su peticion'],400);
+                return response()->json($validator->errors(),400);
             }
             else{
                 
@@ -156,8 +152,7 @@ class CategoriaController extends Controller
                 $categoria->proveedor_id=$request->proveedor_id;
                 $categoria->save();
                 
-                return response()->json([
-                'categoria'=>$categoria, 'mensaje'=>'La categoria se ha actualizado con exito'],201);
+                return response()->json($categoria,201);
     
             }
         }
@@ -176,12 +171,12 @@ class CategoriaController extends Controller
         $categoria = Categoria::find($id);
 
         if(is_null($categoria)){
-            return response()->json(['categoria'=>null,'mensaje'=>'La categoria no esta registrada en la base de datos'],404);
+            return response()->json(null,404);
             
         }
         else{
             $categoria->delete();
-            return response()->json(['mensaje'=> 'La categoria se ha eliminado con exito'],200);
+            return response()->json('La categoria se ha eliminado con exito',200);
         }
         
     }

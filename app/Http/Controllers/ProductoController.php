@@ -31,7 +31,7 @@ class ProductoController extends Controller
             case "0":
                 $proveedor = Proveedor::find($idUsuario);
                 if(is_null($proveedor)){
-                    return response()->json(['proveedor'=>null,'mensaje'=>'El proveedor no está registrado en la base de datos'],200);
+                    return response()->json(null,200);
                 }else{
                     $categorias = $proveedor->categorias;
                     foreach ($categorias as $categoria) {
@@ -64,7 +64,7 @@ class ProductoController extends Controller
                             $productosProveedor[]=$productoFiltrado;
                         }
                     }
-                    return response()->json(['cantidad'=>count($productosProveedor),'productos'=>$productosProveedor, 'mensaje'=>'Productos obtenidas con exito'],200);
+                    return response()->json($productosProveedor,200);
                 }
             break;
             case "1":
@@ -91,7 +91,7 @@ class ProductoController extends Controller
                 }
 
                 $cantidad = count($productos);
-                return response()->json(['cantidad'=>$cantidad,'productos'=>$productos, 'mensaje'=>'Productos obtenidas con exito'],200);
+                return response()->json($productos,200);
             break;
         }
 
@@ -131,10 +131,7 @@ class ProductoController extends Controller
 
         if($validator->fails()){
 
-            return response()->json([
-                'errores' =>$validator->errors(),
-                'mensaje'=>'se ha encontrado errores en su peticion :( '
-            ],400);
+            return response()->json($validator->errors(),400);
         }else{
             $producto = new Producto;
 
@@ -147,10 +144,7 @@ class ProductoController extends Controller
             $producto->save();
     
             // return $producto;
-            return response()->json([
-                'producto'=>$producto,
-                'mensaje'=>'El producto se ha creado con exito'
-            ],201);
+            return response()->json($producto,201);
         }
         
 
@@ -166,9 +160,9 @@ class ProductoController extends Controller
     {
         $producto = Producto::find($id);
         if(is_null($producto)){
-            return response()->json(['producto'=>null,'mensaje'=>'El producto no está registrado en la base de datos'],400);
+            return response()->json(null,400);
         }else{
-            return response()->json(['producto'=>$producto,'mensaje'=>'El producto obtenido con exito'],200);
+            return response()->json($producto,200);
         }
     }
 
@@ -205,18 +199,13 @@ class ProductoController extends Controller
         $validator= Validator::make($request->all(),$reglas,$mensajes);
         
         if($validator->fails()){
-
-            return response()->json([
-                'errores' =>$validator->errors(),
-                'mensaje'=>'se ha encontrado errores en su peticion :( '
-            ],400);
-
+            return response()->json($validator->errors(),400);
         }else{
 
             $producto = Producto::find($id);
             
             if(is_null($producto)){
-                return response()->json(['producto'=>null,'mensaje'=>'El producto no está registrado en la base de datos'],404);
+                return response()->json(null,404);
             }else{
                 
                 $producto->nombre= $request->nombre;
@@ -228,7 +217,7 @@ class ProductoController extends Controller
                 
                 $producto->save();
 
-                return response()->json(['producto'=>$producto,'mensaje'=>'El producto se ha actualizado con exito'],200);
+                return response()->json($producto,200);
 
             }
         }
@@ -245,11 +234,11 @@ class ProductoController extends Controller
         $producto = Producto::find($id);
 
         if(is_null($producto)){
-            return response()->json(['producto'=>null,'mensaje'=>'El producto no está registrado en la base de datos'],404);
+            return response()->json(null,404);
         }
         else{
             $producto->delete();
-            return response()->json(['mensaje'=> 'El producto se ha eliminado con exito'],200);
+            return response()->json('El producto se ha eliminado con exito',200);
         }
     }
 
@@ -279,11 +268,7 @@ class ProductoController extends Controller
 
         $cantidad = count($productos);
 
-        return response()->json([
-            'cantidad'=>$cantidad,
-            'mensaje'=>'Lista de productos filtrados',
-            'productos'=>$productos,
-        ],200);
+        return response()->json($productos,200);
 
     }
 
