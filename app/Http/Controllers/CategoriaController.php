@@ -104,6 +104,17 @@ class CategoriaController extends Controller
         }
     }
 
+    public function buscarPorNombre($cadena)
+    {
+        $categorias = Categoria::where('nombre', 'like', '%'.$cadena.'%')->get();
+        if(is_null($categorias)){
+            return response()->json(null,404);            
+        }
+        else{
+            return response()->json($categorias,200);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *

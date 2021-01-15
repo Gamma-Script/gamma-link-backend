@@ -166,6 +166,17 @@ class ProductoController extends Controller
         }
     }
 
+    public function buscarPorNombre($cadena)
+    {
+        $productos = Producto::where('nombre', 'like', '%'.$cadena.'%')->get();
+        if(is_null($productos)){
+            return response()->json(null,404);            
+        }
+        else{
+            return response()->json($productos,200);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
