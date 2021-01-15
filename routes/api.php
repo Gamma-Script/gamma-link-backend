@@ -54,12 +54,14 @@ Route::get('proveedores/{id}/anuncios','ProveedorController@anuncios');
 Route::get('proveedores/{id}/puntuaciones','ProveedorController@puntuaciones');
 Route::get('proveedores/{id}/categorias','ProveedorController@categorias');
 
-
-
-
 Route::get('puntuaciones','PuntuacionController@index');
 Route::post('puntuaciones','PuntuacionController@store');
 Route::put('puntuaciones/{id}','PuntuacionController@update');
 Route::delete('puntuaciones/{id}','PuntuacionController@destroy');
 
 Route::get('proveedores/{id}','ProveedorController@show');
+
+Route::get('user-cliente/{id}','UserController@cliente');
+Route::get('user-proveedor/{id}','UserController@proveedor');
+// Route::get('user/{id}','UserController@tipo');
+Route::get('user/{correo}','UserController@getUsuarioPorCorreo');
