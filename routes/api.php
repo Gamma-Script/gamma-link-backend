@@ -37,7 +37,7 @@ Route::post('categorias','CategoriaController@store');
 Route::put('categorias/{id}','CategoriaController@update');
 Route::delete('categorias/{id}','CategoriaController@destroy');
 Route::get('categorias-usuario','CategoriaController@indexUsuario');
-Route::get('categorias-buscar/{cadena}','CategoriaController@buscarPorNombre');
+Route::get('categorias/buscar/{cadena}','CategoriaController@buscarPorNombre');
 
 Route::post('clientes','ClienteController@store');
 
@@ -55,6 +55,10 @@ Route::get('proveedores','ProveedorController@index');
 Route::get('proveedores/{id}/anuncios','ProveedorController@anuncios');
 Route::get('proveedores/{id}/puntuaciones','ProveedorController@puntuaciones');
 Route::get('proveedores/{id}/categorias','ProveedorController@categorias');
+
+Route::get('proveedores/buscar/{cadena}','ProveedorController@buscarPorNombre');
+
+Route::get('proveedores/buscar/puntuacion/{puntuacion}','ProveedorController@buscarPorPuntuacion');
 
 
 Route::get('puntuaciones','PuntuacionController@index');
