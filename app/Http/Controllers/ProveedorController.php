@@ -110,7 +110,7 @@ class ProveedorController extends Controller
         if(is_null($proveedor)){
             return response()->json(null,404);
         }else{
-            $puntuaciones = $proveedor->puntuaciones;
+            $puntuaciones = Puntuacion::where('proveedor_id', $proveedor->id)->orderBy('created_at','DESC')->get();
             if(is_null($puntuaciones) || count($puntuaciones)==0){
                 return response()->json($puntuaciones,200);
             }else{

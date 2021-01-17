@@ -62,10 +62,10 @@ Route::get('proveedores/buscar/puntuacion/{puntuacion}','ProveedorController@bus
 Route::get('proveedores/buscar/ubicacion/{idDepto}','ProveedorController@buscarPorUbicacion');
 
 
-Route::get('puntuaciones','PuntuacionController@index');
-Route::post('puntuaciones','PuntuacionController@store');
-Route::put('puntuaciones/{id}','PuntuacionController@update');
-Route::delete('puntuaciones/{id}','PuntuacionController@destroy');
+Route::get('proveedores/puntuaciones','PuntuacionController@index');
+Route::post('proveedores/puntuaciones','PuntuacionController@store');
+Route::put('proveedores/puntuaciones/{id}','PuntuacionController@update');
+Route::delete('proveedores/puntuaciones/{id}','PuntuacionController@destroy');
 
 Route::get('proveedores/{id}','ProveedorController@show');
 
