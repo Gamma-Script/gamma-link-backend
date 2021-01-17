@@ -27,18 +27,18 @@ class PuntuacionController extends Controller
     public function store(Request $request)
     {
         $reglas =[
-            'puntuacion'=>'required|integer|min:1|max:5',
-            'proveedorId'=>'required',
-            'clienteId'=>'required'
+            'calificacion'=>'required|integer|min:1|max:5',
+            'proveedor_id'=>'required',
+            'cliente_id'=>'required'
         ];
 
         $mensajes= [
-            'puntuacion.required'=>'Debe ingresar una puntuación',
-            'puntuacion.integer'=> 'Puntuación debe ser un valor entero',
-            'puntuacion.min'=>'Puntuación debe ser un valor entre 1 y 5',
-            'puntuacion.max'=>'Puntuación debe ser un valor entre 1 y 5',
-            'proveedorId.required'=>'Debe ingresar un proveedor',
-            'clienteId.required'=>'Debe ingresar un cliente'
+            'calificacion.required'=>'Debe ingresar una puntuación',
+            'calificacion.integer'=> 'Puntuación debe ser un valor entero',
+            'calificacion.min'=>'Puntuación debe ser un valor entre 1 y 5',
+            'calificacion.max'=>'Puntuación debe ser un valor entre 1 y 5',
+            'proveedor_id.required'=>'Debe ingresar un proveedor',
+            'cliente_id.required'=>'Debe ingresar un cliente'
         ];
 
         $validator = Validator::make($request->all(), $reglas, $mensajes);
@@ -50,10 +50,10 @@ class PuntuacionController extends Controller
 
             $puntuacion = new Puntuacion;
 
-            $puntuacion->puntuacion = $request->puntuacion;
+            $puntuacion->puntuacion = $request->calificacion;
             $puntuacion->comentario = $request->comentario;
-            $puntuacion->proveedor_id=$request->proveedorId;
-            $puntuacion->cliente_id=$request->clienteId;
+            $puntuacion->proveedor_id=$request->proveedor_id;
+            $puntuacion->cliente_id=$request->cliente_id;
             $puntuacion->save();
             
             return response()->json($puntuacion,201);
