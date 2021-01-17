@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Departamento;
 use App\Puntuacion;
 use App\User;
 use App\Proveedor;
@@ -67,7 +68,38 @@ class ProveedorController extends Controller
         }else{
             $puntuaciones = $puntuaciones->where('promedio',$puntuacion);
             foreach ($puntuaciones as $puntuacione) {
-                $proveedores[]= Proveedor::find($puntuacione->proveedor_id);
+                $proveedores[]= Proveedor::find($puntuacione->proveedor_id)->usuario;
+            }
+            foreach ($proveedores as $proveedor) {
+                $proveedor->proveedor;
+            }
+            return response()->json($proveedores,200);
+        }
+    }
+
+    public function buscarPorUbicacion($idDepto)
+    {
+
+        // Agrupar puntuaciones de cada proveedor
+
+        // $departamento= Departamento::find($idDepto);
+        $sucursales = DB::table('sucursales')
+        ->select(DB::raw('proveedor_id'))
+        ->where('departamento_id',$idDepto)
+        ->groupBy('proveedor_id')
+        ->get();
+
+        if(is_null($sucursales)){
+            return response()->json(null,404);            
+        }else{
+            $proveedores=[];
+            // $puntuaciones = $puntuaciones->where('promedio',$puntuacion);
+            foreach ($sucursales as $sucursal) {
+                $proveedores[]= Proveedor::find($sucursal->proveedor_id)->usuario;
+            }
+
+            foreach ($proveedores as $proveedor) {
+                $proveedor->proveedor;
             }
             return response()->json($proveedores,200);
         }

@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             ProductoSeeder::class,
             AnuncioSeeder::class,
             PuntuacionSeeder::class,
+            DepartamentoSeeder::class,
+            SucursalSeeder::class
         ]);
     }
 }
