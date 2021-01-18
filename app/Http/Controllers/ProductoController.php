@@ -19,7 +19,7 @@ class ProductoController extends Controller
     public function index()
     {
         //
-        return Producto::all();
+        return Producto::with('marca','categoria')->get();
     }
 
     public function indexUsuario(Request $request)

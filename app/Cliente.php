@@ -11,7 +11,7 @@ class Cliente extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-    	'user_id'
+        'user_id'       
     ];
 
     public function usuario(){

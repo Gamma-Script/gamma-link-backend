@@ -57,6 +57,7 @@ Route::get('proveedores/{id}/puntuaciones','ProveedorController@puntuaciones');
 Route::get('proveedores/{id}/categorias','ProveedorController@categorias');
 
 Route::get('proveedores/buscar/{cadena}','ProveedorController@buscarPorNombre');
+Route::get('proveedores/departamentos','ProveedorController@getDeptos');
 
 Route::get('proveedores/buscar/puntuacion/{puntuacion}','ProveedorController@buscarPorPuntuacion');
 Route::get('proveedores/buscar/ubicacion/{idDepto}','ProveedorController@buscarPorUbicacion');
