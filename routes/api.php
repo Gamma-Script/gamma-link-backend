@@ -42,13 +42,15 @@ Route::get('categorias/buscar/{cadena}','CategoriaController@buscarPorNombre');
 Route::post('clientes','ClienteController@store');
 
 Route::get('productos','ProductoController@index');
+Route::get('productos/proveedor/{id}','ProductoController@indexProveedor');
+Route::get('productos/marcas', 'ProductoController@getMarcas');
 Route::get('productos/{id}','ProductoController@show');
 Route::post('productos','ProductoController@store');
 Route::put('productos/{id}','ProductoController@update');
 Route::delete('productos/{id}','ProductoController@destroy');
 
 Route::get('productos-filtrados','ProductoController@productosFiltrados');
-Route::get('productos-usuario','ProductoController@indexUsuario');
+Route::get('productos/usuario/{tipo}','ProductoController@indexUsuario');
 Route::get('productos-buscar/{cadena}','ProductoController@buscarPorNombre');
 
 Route::get('proveedores','ProveedorController@index');
