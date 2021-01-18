@@ -189,7 +189,7 @@ class ProductoController extends Controller
 
     public function buscarPorNombre($cadena)
     {
-        $productos = Producto::where('nombre', 'like', '%' . $cadena . '%')->get();
+        $productos = Producto::with('marca', 'categoria')->where('nombre', 'like', '%' . $cadena . '%')->get();
         if (is_null($productos)) {
             return response()->json(null, 404);
         } else {
@@ -271,33 +271,26 @@ class ProductoController extends Controller
         }
     }
 
-    public function productosFiltrados(Request $request)
+    public function productosFiltrados($marca, $categoria, $precio)
     {
-
-        $marca = $request->filtroMarca;
-        $categoria = $request->filtroCategoria;
-        $precio = $request->filtroPrecio;
-
-        if (!is_null($marca) && !is_null($categoria) && !is_null($precio)) {
-            $productos = Producto::where('marca_id', $marca)->where('categoria_id', $categoria)->where('precio', '<=', $precio)->get();
-        } elseif (!is_null($marca) && !is_null($categoria)) {
-            $productos = Producto::where('marca_id', $marca)->where('categoria_id', $categoria)->get();
-        } elseif (!is_null($marca) && !is_null($precio)) {
-            $productos = Producto::where('marca_id', $marca)->where('precio', '<=', $precio)->get();
-        } elseif (!is_null($marca)) {
-            $productos = Producto::where('marca_id', $marca)->get();
-        } elseif (!is_null($categoria) && !is_null($precio)) {
-            $productos = Producto::where('categoria_id', $categoria)->where('precio', '<=', $precio)->get();
-        } elseif (!is_null($categoria)) {
-            $productos = Producto::where('categoria_id', $categoria)->get();
-        } elseif (!is_null($precio)) {
-            $productos = Producto::where('precio', '<=', $precio)->get();
+        if ($marca !=0 && $categoria !=0 && $precio !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('marca_id', $marca)->where('categoria_id', $categoria)->where('precio', '<=', $precio)->get();
+        } elseif ($marca !=0 && $categoria !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('marca_id', $marca)->where('categoria_id', $categoria)->get();
+        } elseif ($marca !=0 && $precio !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('marca_id', $marca)->where('precio', '<=', $precio)->get();
+        } elseif ($marca !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('marca_id', $marca)->get();
+        } elseif ($categoria !=0 && $precio !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('categoria_id', $categoria)->where('precio', '<=', $precio)->get();
+        } elseif ($categoria !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('categoria_id', $categoria)->get();
+        } elseif ($precio !=0) {
+            $productos = Producto::with('marca', 'categoria')->where('precio', '<=', $precio)->get();
         } else {
-            $productos = Producto::all();
+            $productos = Producto::with('marca', 'categoria')->get();
         }
-
         $cantidad = count($productos);
-
         return response()->json($productos, 200);
     }
 }

@@ -49,9 +49,9 @@ Route::post('productos','ProductoController@store');
 Route::put('productos/{id}','ProductoController@update');
 Route::delete('productos/{id}','ProductoController@destroy');
 
-Route::get('productos-filtrados','ProductoController@productosFiltrados');
+Route::get('productos/filtrados/{marca}/{categoria}/{precio}','ProductoController@productosFiltrados');
 Route::get('productos/usuario/{tipo}','ProductoController@indexUsuario');
-Route::get('productos-buscar/{cadena}','ProductoController@buscarPorNombre');
+Route::get('productos/buscar/{cadena}','ProductoController@buscarPorNombre');
 
 Route::get('proveedores','ProveedorController@index');
 Route::get('proveedores/{id}/anuncios','ProveedorController@anuncios');
