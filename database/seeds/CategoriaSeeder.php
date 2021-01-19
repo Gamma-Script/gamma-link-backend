@@ -12,18 +12,91 @@ class CategoriaSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <=10 ; $i++) {
+        $categoria1 = Categoria::create([
+            'nombre'=>'Abarrotes',
+            'descripcion'=>'Articulos de Abarrotes',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>1
+        ]);
 
-        	for ($j=1; $j <=3 ; $j++) {
+        $categoria2 = Categoria::create([
+            'nombre'=>'Hogar',
+            'descripcion'=>'Articulos de Hogar',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>1
+        ]);
 
-        		$categoria = Categoria::create([
-		    		'nombre'=>'Categoria '.$j.' del proveedor '.$i,
-		    		'descripcion'=>'Descripción de categoria '.$j.' del proveedor '.$i,
-		    		'imagen' => 'Imagen de categoria '.$j.' del proveedor '.$i,
-		    		'proveedor_id'=>$i,
-	    		]);
+        $categoria3 = Categoria::create([
+            'nombre'=>'Cocina',
+            'descripcion'=>'Articulos de Cocina',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>1
+        ]);
 
-        	}
-        }
+        $categoria4 = Categoria::create([
+            'nombre'=>'Carnes',
+            'descripcion'=>'Carnes',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>2
+        ]);
+
+        $categoria5 = Categoria::create([
+            'nombre'=>'Bebidas',
+            'descripcion'=>'Bebidas',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>2
+        ]);
+
+        $categoria6 = Categoria::create([
+            'nombre'=>'Panaderia',
+            'descripcion'=>'Panaderia',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>2
+        ]);
+
+        $categoria7 = Categoria::create([
+            'nombre'=>'Electricidad',
+            'descripcion'=>'Electricidad',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>3
+        ]);
+
+        $categoria8 = Categoria::create([
+            'nombre'=>'Pintura',
+            'descripcion'=>'Pintura',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>3
+        ]);
+
+        $categoria9 = Categoria::create([
+            'nombre'=>'Fontaneria',
+            'descripcion'=>'Fontaneria',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>3
+        ]);
+
+        $categoria10 = Categoria::create([
+            'nombre'=>'Memorias',
+            'descripcion'=>'Memorias',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>4
+        ]);
+
+        $categoria11 = Categoria::create([
+            'nombre'=>'CPUs',
+            'descripcion'=>'CPUs',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>4
+        ]);
+
+        $categoria12 = Categoria::create([
+            'nombre'=>'Monitores',
+            'descripcion'=>'Monitores',
+            'imagen' => 'default.jpg',
+            'proveedor_id'=>4
+        ]);
+
+
+
     }
 }
