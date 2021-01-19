@@ -12,10 +12,88 @@ class MarcaSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <=10 ; $i++) {
-        	$marca = Marca::create([
-	    		'nombre'=>'Marca '.$i
-    		]);
-        }
+        $marca = Marca::create([
+            'nombre'=>'El Faro'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Gato Negro'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Facela'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Faber-Castell'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Staedler'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Stanley'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'FUD'
+        ]);
+
+        $marca8 = Marca::create([
+            'nombre'=>'La Única'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Sula'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Dell'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'HP'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Lenovo'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Intel'
+        ]);
+
+        $marca14 = Marca::create([
+            'nombre'=>'BTicino'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Corona'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Sherwin-Williams'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Samsung'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Pajarito'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Ken'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Kraff'
+        ]);
+
+        $marca = Marca::create([
+            'nombre'=>'Discovery'
+        ]);
     }
 }
