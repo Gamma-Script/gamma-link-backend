@@ -12,10 +12,49 @@ class DepartamentoSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <=10 ; $i++) {
-        	$marca = Departamento::create([
-	    		'nombre'=>'Departamento '.$i
-    		]);
-        }
+        $departamento = Departamento::create([
+            'nombre'=>'Ahuachapán'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Santa Ana'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Sonsonate'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Chalatenango'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'La Libertad'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'San Salvador'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Cuscatlán'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'La Paz'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Cabañas'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'San Vicente'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Usulután'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'San Miguel'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'Morazán'
+        ]);
+        $departamento = Departamento::create([
+            'nombre'=>'La Unión'
+        ]);
+
+
     }
 }
