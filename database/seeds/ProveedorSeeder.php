@@ -14,25 +14,70 @@ class ProveedorSeeder extends Seeder
      */
     public function run()
     {
-    	for ($i=1; $i <=10 ; $i++) {
 
-    		$usuario = User::create([
-	    		'nombre'=>'Proveedor '.$i,
-	    		'email'=>'proveedor'.$i.'@gmail.com',
-	    		'email_verified_at' => now(),
-	    		'password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-	    		'tipo'=>'0',
-	    		'username'=>'Proveedor '.$i,
-	    		'remember_token' => Str::random(10),
-    		]);
+        $usuario1 = User::create([
+            'nombre'=>'Tienda Molina ',
+            'email'=>'TiendaMolina@gmail.com',
+            'email_verified_at' => now(),
+            'password'=>'$2b$10$QdxiokZ1A6HB.4wX.2zIm.GbVpT7r/X2pQVwwmOdfxJxcoRe1VWgy', // password
+            'tipo'=>'0',
+            'username'=>'TiendaMolina',
+            'remember_token' => Str::random(10),
+        ]);
 
-    		$proveedor = Proveedor::create([
-	    		'descripcion'=>'Descripción del Proveedor '.$i,
-	    		'imagen'=>'Imagen del Proveedor '.$i,
-	    		'user_id'=> $usuario->id
-    		]);
-    		
-    	}
+        $proveedor1 = Proveedor::create([
+            'descripcion'=>'Productos varios',
+            'imagen'=>'default.jpg',
+            'user_id'=> $usuario1->id
+        ]);
+
+        $usuario2 = User::create([
+            'nombre'=>'Productos El Zocalo',
+            'email'=>'ProductosZocalo@gmail.com',
+            'email_verified_at' => now(),
+            'password'=>'$2b$10$QdxiokZ1A6HB.4wX.2zIm.GbVpT7r/X2pQVwwmOdfxJxcoRe1VWgy', // password
+            'tipo'=>'0',
+            'username'=>'ProductosZocalo',
+            'remember_token' => Str::random(10),
+        ]);
+
+        $proveedor2 = Proveedor::create([
+            'descripcion'=>'Productos alimenticios',
+            'imagen'=>'default.jpg',
+            'user_id'=> $usuario2->id
+        ]);
+
+        $usuario3 = User::create([
+            'nombre'=>'MATEP',
+            'email'=>'MATEP@gmail.com',
+            'email_verified_at' => now(),
+            'password'=>'$2b$10$QdxiokZ1A6HB.4wX.2zIm.GbVpT7r/X2pQVwwmOdfxJxcoRe1VWgy', // password
+            'tipo'=>'0',
+            'username'=>'matep',
+            'remember_token' => Str::random(10),
+        ]);
+
+        $proveedor = Proveedor::create([
+            'descripcion'=>'Productos de Ferreteria',
+            'imagen'=>'default.jpg',
+            'user_id'=> $usuario3->id
+        ]);
+
+        $usuario4 = User::create([
+            'nombre'=>'Microson',
+            'email'=>'Microson@gmail.com',
+            'email_verified_at' => now(),
+            'password'=>'$2b$10$QdxiokZ1A6HB.4wX.2zIm.GbVpT7r/X2pQVwwmOdfxJxcoRe1VWgy', // password
+            'tipo'=>'0',
+            'username'=>'microson',
+            'remember_token' => Str::random(10),
+        ]);
+
+        $proveedor = Proveedor::create([
+            'descripcion'=>'Productos Informáticos',
+            'imagen'=>'default.jpg',
+            'user_id'=> $usuario4->id
+        ]);
     	
         
     }
