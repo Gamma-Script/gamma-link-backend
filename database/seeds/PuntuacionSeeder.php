@@ -12,11 +12,11 @@ class PuntuacionSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <=10 ; $i++) { //Proveedor
-        	for ($j=1; $j <=10 ; $j++) { // Cliente
+        for ($i=1; $i <=4 ; $i++) { //Proveedor
+        	for ($j=1; $j <=4 ; $j++) { // Cliente
         		$puntuacion = Puntuacion::create([
 	        		'puntuacion'=>rand(1,5),
-	        		'comentario'=>'Comentario sobre proveedor '.$i.' por parte del cliente '.$j,
+	        		'comentario'=>'Muy buen proveedor',
 		    		'proveedor_id'=>$i,
 		    		'cliente_id'=>$j,
 	    		]);
