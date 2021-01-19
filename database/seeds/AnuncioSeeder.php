@@ -13,20 +13,45 @@ class AnuncioSeeder extends Seeder
     public function run()
     {
 
-        for ($i=1; $i <=10 ; $i++) { //Proveedor
-        	for ($j=1; $j <=3 ; $j++) { //Anuncio
+        $Anuncio = Anuncio::create([
+    		'nombre'=>'Gran Oferta de Verano',
+    		'descripcion'=>'Aprovecha nuestra gran oferta',
+    		'imagen' => 'default.jgp',
+    		'fecha_publicacion' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'fecha_baja' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'estado' => 0,
+    		'proveedor_id'=>4,
+		]);
 
-        		$Anuncio = Anuncio::create([
-		    		'nombre'=>'Anuncio '.$j.' del proveedor '.$i,
-		    		'descripcion'=>'Descripción de Anuncio '.$j.' del proveedor '.$i,
-		    		'imagen' => 'Imagen de Anuncio '.$j.' del proveedor '.$i,
-		    		'fecha_publicacion' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
-		    		'fecha_baja' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
-		    		'estado' => 0,
-		    		'proveedor_id'=>$i,
-	    		]);
-        	}
-        }
+		$Anuncio = Anuncio::create([
+    		'nombre'=>'Gran Oferta de Fin de Año',
+    		'descripcion'=>'Aprovecha nuestra gran oferta',
+    		'imagen' => 'default.jgp',
+    		'fecha_publicacion' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'fecha_baja' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'estado' => 0,
+    		'proveedor_id'=>3,
+		]);
+
+		$Anuncio = Anuncio::create([
+    		'nombre'=>'Gran Oferta de Año Escolar',
+    		'descripcion'=>'Aprovecha nuestra gran oferta',
+    		'imagen' => 'default.jgp',
+    		'fecha_publicacion' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'fecha_baja' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'estado' => 0,
+    		'proveedor_id'=>1,
+		]);
+
+		$Anuncio = Anuncio::create([
+    		'nombre'=>'Gran Oferta de Agosto',
+    		'descripcion'=>'Aprovecha nuestra gran oferta',
+    		'imagen' => 'default.jgp',
+    		'fecha_publicacion' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'fecha_baja' => $this->fechaRandom('2020-11-01 00:00:00','2021-06-01 00:00:00'),
+    		'estado' => 0,
+    		'proveedor_id'=>2,
+		]);
     }
 
     public function fechaRandom($fechaInicio, $fechaFin)
