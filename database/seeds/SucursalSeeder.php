@@ -12,8 +12,8 @@ class SucursalSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <=10 ; $i++) {
-            for ($j=1; $j <=10 ; $j++) {
+        for ($i=1; $i <=4 ; $i++) {
+            for ($j=1; $j <=2 ; $j++) {
             	$marca = Sucursal::create([
     	    		'nombre'=>'Sucursal '.$j.' del Proveedor '.$i,
                     'proveedor_id'=>$i,
